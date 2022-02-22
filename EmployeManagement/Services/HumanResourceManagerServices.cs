@@ -80,7 +80,7 @@ namespace EmployeManagement.Services
             if (department != null)
             {
                 string temp = department.Name;
-                department.Name = departmentName;
+                department.Name = departmentNewName;
                 Console.BackgroundColor = ConsoleColor.Green;
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine($"Department Name for Department {departmentName} has been changed" +
@@ -138,6 +138,8 @@ namespace EmployeManagement.Services
                 {
                     employeeArr[i] = department.GetEmployees()[i];
                 }
+
+                department.EmployeesProp = employeeArr;
             }
             else
             {
@@ -166,14 +168,15 @@ namespace EmployeManagement.Services
                                               $" from {temp} to {employee.Salary}.");
                             Console.BackgroundColor = ConsoleColor.Black;
                         }
-                        else
-                        {
-                            Console.BackgroundColor = ConsoleColor.Red;
-                            Console.ForegroundColor = ConsoleColor.White;
-                            Console.WriteLine($"Warning!!! Employee with NO-{employeeNo} doesn't exist!");
-                            Console.BackgroundColor = ConsoleColor.Black;
-                        }
+                        
                     }
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($"Warning!!! Employee with NO-{employeeNo} doesn't exist!");
+                    Console.BackgroundColor = ConsoleColor.Black;
                 }
             }
         }
@@ -196,14 +199,15 @@ namespace EmployeManagement.Services
                                               $" from {temp} to {employee.Position}.");
                             Console.BackgroundColor = ConsoleColor.Black;
                         }
-                        else
-                        {
-                            Console.BackgroundColor = ConsoleColor.Red;
-                            Console.ForegroundColor = ConsoleColor.White;
-                            Console.WriteLine($"Warning!!! Employee with NO-{employeeNo} doesn't exist!");
-                            Console.BackgroundColor = ConsoleColor.Black;
-                        }
+                       
                     }
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($"Warning!!! Employee with NO-{employeeNo} doesn't exist!");
+                    Console.BackgroundColor = ConsoleColor.Black;
                 }
             }
         }
@@ -263,7 +267,7 @@ namespace EmployeManagement.Services
         {
             foreach (Department item in _departments)
             {
-                if (item.Name == departmentName.ToLower())
+                if (item.Name.ToLower() == departmentName.ToLower())
                 {
                     return item;
                 }

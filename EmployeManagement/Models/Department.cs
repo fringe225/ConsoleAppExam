@@ -20,6 +20,15 @@ namespace EmployeManagement.Models
             SalaryLimit = salaryLimit;
             Employees = new Employee[0];
         }
+
+        public Employee[] EmployeesProp
+        {
+            get => Employees;
+            set
+            {
+                Employees = value;
+            }
+        }
         public string Name
         {
             get => _name;
@@ -92,6 +101,7 @@ namespace EmployeManagement.Models
             if (Employees.Length < WorkerLimit)
             {
                 Array.Resize(ref Employees, Employees.Length + 1);
+                employee.No = $"{employee.DepartmentName[0..2].ToUpper()}{1000+Employees.Length}";
                 Employees[Employees.Length - 1] = employee;
             }
             else
@@ -105,6 +115,30 @@ namespace EmployeManagement.Models
 
         public Employee[] GetEmployees() => Employees; // return array of Employees in this department
 
+        //public void RemoveEmployee(string departmentName,string employeeNo)
+        //{
+        //    Employee[] employeeArr = new Employee[Employees.Length - 1];
+        //    int temp = 0;
+        //    for (int i = 0; i < Employees.Length; i++)
+        //    {
+        //        if (Employees[i].No == employeeNo)
+        //        {
+        //            temp = i;
+        //        }
+        //    }
+
+        //    for (int i = 0; i < temp; i++)
+        //    {
+        //        employeeArr[i] = Employees[i];
+        //    }
+
+        //    for (int i = temp + 1; i < employeeArr.Length; i++)
+        //    {
+        //        employeeArr[i] = Employees[i];
+        //    }
+
+        //     EmployeesProp = employeeArr ;
+        //}
         public double CalcSalaryAverage()
         {
             double average = 0;

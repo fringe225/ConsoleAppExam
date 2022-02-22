@@ -8,7 +8,7 @@ namespace EmployeManagement.Models
 {
     internal class Employee
     {
-        private static int _count=1000;
+        
 
         private string _fullName;
 
@@ -27,8 +27,7 @@ namespace EmployeManagement.Models
             Position=position;
             Salary=salary;
             DepartmentName=departmentName;
-            _count++;
-            No = $"{DepartmentName[0..2].ToUpper()}{_count}";
+            
         }
 
         public string FullName
@@ -47,7 +46,7 @@ namespace EmployeManagement.Models
                         {
                             if (!string.IsNullOrWhiteSpace(item))
                             {
-                                _fullName += item[0].ToString().ToUpper() + item.Substring(1) + " ";
+                                _fullName += item[0].ToString().ToUpper() + item.Substring(1).ToLower() + " ";
                             }
 
                         }
@@ -73,7 +72,7 @@ namespace EmployeManagement.Models
                     value = value.Trim();
                     if (value.Length>1 && !string.IsNullOrWhiteSpace(value))
                     {
-                        _position = value[0].ToString().ToUpper() + value.Substring(1);
+                        _position = value[0].ToString().ToUpper() + value.Substring(1).ToLower();
                         break;
                     }
                     Console.BackgroundColor = ConsoleColor.Red;

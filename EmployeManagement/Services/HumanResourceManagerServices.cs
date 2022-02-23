@@ -284,7 +284,7 @@ namespace EmployeManagement.Services
             return null;
         }
 
-        public bool SalaryLimitCheck(Department department,int value)  // Maybe Can Not use that?
+        public bool SalaryLimitCheck(Department department,int value)  // Maybe Can Not use that? or not ?
         {
             int salarySum = 0;
             if (department.GetEmployees() != null)

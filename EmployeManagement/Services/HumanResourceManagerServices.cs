@@ -216,22 +216,22 @@ namespace EmployeManagement.Services
             }
         }
 
-        public Employee[] GetEmployeesByDepartmentName(string departmentName)
-        {
-            Department department = FindDepartment(departmentName);
-            if (department != null)
-            {
-                return department.GetEmployees();
-            }
-            else
-            {
-                Console.BackgroundColor = ConsoleColor.Red;
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("Warning!!! Department Name doesn't exist!");
-                Console.BackgroundColor = ConsoleColor.Black;
-                return null;
-            }
-        }
+        //public Employee[] GetEmployeesByDepartmentName(string departmentName)
+        //{
+        //    Department department = FindDepartment(departmentName);
+        //    if (department != null)
+        //    {
+        //        return department.GetEmployees();
+        //    }
+        //    else
+        //    {
+        //        Console.BackgroundColor = ConsoleColor.Red;
+        //        Console.ForegroundColor = ConsoleColor.White;
+        //        Console.WriteLine("Warning!!! Department Name doesn't exist!");
+        //        Console.BackgroundColor = ConsoleColor.Black;
+        //        return null;
+        //    }
+        //}
 
         public Employee[] SearchEmployee(string search)
         {
@@ -251,17 +251,21 @@ namespace EmployeManagement.Services
                                                      .Contains(search.ToLower())))
                         {
                             Array.Resize(ref findEmployees, findEmployees.Length + 1);
-                            findEmployees[findEmployees.Length - 1] = employee;
-                        }
-                        else
-                        {
-                            Console.BackgroundColor = ConsoleColor.Red;
-                            Console.ForegroundColor = ConsoleColor.White;
-                            Console.WriteLine($"Warning!!! Can't Find Any Employee with that Information!");
-                            Console.BackgroundColor = ConsoleColor.Black;
+                            findEmployees[^1] = employee;
                         }
                     }
+                    
                 }
+                
+            }
+
+            if (findEmployees == null)
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Warning!!! Can't Find Any Employee with that Information!");
+                Console.BackgroundColor = ConsoleColor.Black;
+                return null;
             }
 
             return findEmployees;
@@ -280,7 +284,7 @@ namespace EmployeManagement.Services
             return null;
         }
 
-        public bool SalaryLimitCheck(Department department,int value)
+        public bool SalaryLimitCheck(Department department,int value)  // Maybe Can Not use that?
         {
             int salarySum = 0;
             if (department.GetEmployees() != null)

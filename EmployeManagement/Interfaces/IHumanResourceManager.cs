@@ -22,8 +22,6 @@ namespace EmployeManagement.Interfaces
         void EditEmployee(string employeeNo, int newSalary);
         void EditEmployee(string employeeNo, string newPosition);
 
-        Employee[] GetEmployeesByDepartmentName(string departmentName);
-
         Employee[] SearchEmployee(string search);
 
 

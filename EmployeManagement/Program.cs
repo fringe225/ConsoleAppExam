@@ -16,21 +16,22 @@ namespace EmployeManagement
             do
             {
                 Console.Clear();            
-                Console.WriteLine("Seciminizi Edin");
-                Console.WriteLine("1. Departameantlerin siyahisini gostermek");
-                Console.WriteLine("2. Departamenet yaratmaq");
-                Console.WriteLine("3. Departmanetde deyisiklik etmek");
-                Console.WriteLine("4. Iscilerin siyahisini gostermek");
-                Console.WriteLine("5. Departamentdeki iscilerin siyahisini gostermrek");
-                Console.WriteLine("6. Isci elave etmek");
-                Console.WriteLine("7. Isci uzerinde deyisiklik etmek");
-                Console.WriteLine("8. Departamentden isci silinmesi");
-                Console.WriteLine("9. exit");
+                Console.WriteLine("Choose Option\n");
+                Console.WriteLine("1. Show Departments");
+                Console.WriteLine("2. Create Department");
+                Console.WriteLine("3. Edit Department");
+                Console.WriteLine("4. Show Employees");
+                Console.WriteLine("5. Show Employees in Department");
+                Console.WriteLine("6. Add Employee");
+                Console.WriteLine("7. Edit Employee");
+                Console.WriteLine("8. Remove Employee");
+                Console.WriteLine("9. Seach Employee");
+                Console.WriteLine("10. Exit");
 
                 int choose;
-                while (!int.TryParse(Console.ReadLine(), out choose) || choose < 1 || choose > 9)
+                while (!int.TryParse(Console.ReadLine(), out choose) || choose < 1 || choose > 10)
                 {
-                    Console.WriteLine("Duzgun Secim Edin");
+                    Console.WriteLine("Make choose right!");
                 }
 
                 switch (choose)
@@ -74,7 +75,12 @@ namespace EmployeManagement
                         Console.ReadLine();
                         break;
                     case 9:
-                        Console.WriteLine("Tesekkurler Sagolun");
+                        Console.Clear();
+                        FindEmployees(humanResourceManagerServices);
+                        Console.ReadLine();
+                        break;
+                    case 10:
+                        Console.WriteLine("Shutting down...");
                         return;
                 }
             } while (true);
@@ -166,6 +172,7 @@ namespace EmployeManagement
 
             string departmentName = Console.ReadLine();
 
+            Console.Clear();
             Console.WriteLine("Enter Full Name: ");
             string employeeName = Console.ReadLine();
 
@@ -287,6 +294,24 @@ namespace EmployeManagement
             string employeeNo = Console.ReadLine();
 
             humanResourceManagerServices.RemoveEmployee(departmentName,employeeNo);
+        }
+
+        public static void FindEmployees(HumanResourceManagerServices humanResourceManagerServices)
+        {
+            Console.WriteLine("Enter information about Employee: Name, Surename, Position, EmployeeNo.");
+            string search = Console.ReadLine()??" ";
+            foreach (Employee employee in humanResourceManagerServices.SearchEmployee(search))
+            {
+                if (employee != null)
+                {
+                    Console.WriteLine(employee);
+                }
+                else
+                {
+                    Console.WriteLine("Information doesn't match with any of Employee in database!!!");
+                }
+                
+            }
         }
     }
 }

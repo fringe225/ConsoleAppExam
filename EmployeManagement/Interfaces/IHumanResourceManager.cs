@@ -14,7 +14,7 @@ namespace EmployeManagement.Interfaces
         Department[] GetDepartments();
 
         void EditDepartments(string departmentName, int workerLimit);
-        void EditDepartments(int salarylimit,string departmentName);
+        void EditDepartments(int salaryLimit,string departmentName);
         void EditDepartments(string departmentName, string departmentNewName);
         void AddEmployee(string departmentName, string fullName, string position, int salary);
 

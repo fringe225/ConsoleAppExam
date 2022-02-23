@@ -22,7 +22,7 @@ namespace EmployeManagement.Services
         {
             Department department = new Department(name, workerLimit, salaryLimit);
             Array.Resize(ref _departments, _departments.Length + 1);
-            _departments[_departments.Length - 1] = department;
+            _departments[^1] = department;
         }
 
         public Department[] GetDepartments() => _departments; // return all departments
@@ -101,6 +101,10 @@ namespace EmployeManagement.Services
             Department department = FindDepartment(departmentName);
             if (department != null)
             {
+                while (SalaryLimitCheck(department, salary))
+                {
+                    int.TryParse(Console.ReadLine(), out salary);
+                }
                 Employee employee = new Employee(fullName, position, salary, departmentName);
                 department.AddEmployee(employee);
                 return;
@@ -139,7 +143,7 @@ namespace EmployeManagement.Services
                     employeeArr[i] = department.GetEmployees()[i];
                 }
 
-                department.EmployeesProp = employeeArr;
+                department.EmployeesProp = employeeArr;  //FIX ENCAPSULATION
             }
             else
             {
@@ -274,6 +278,32 @@ namespace EmployeManagement.Services
             }
 
             return null;
+        }
+
+        public bool SalaryLimitCheck(Department department,int value)
+        {
+            int salarySum = 0;
+            if (department.GetEmployees() != null)
+            {
+                foreach (Employee employee in department.GetEmployees())
+                {
+                    salarySum += employee.Salary;
+                }
+            }
+
+            salarySum += value;
+            if (salarySum <= department.SalaryLimit)
+            {
+                return false;
+            }
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"Warning!!! Salary Limit for {department.Name} is {department.SalaryLimit}!\n" +
+                              $"Your Employees Salaries Sum is {salarySum - value}!\n" +
+                              $"Enter Salary correctly!");
+            Console.BackgroundColor = ConsoleColor.Black;
+
+            return true;
         }
     }
 }

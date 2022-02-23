@@ -40,7 +40,7 @@ namespace EmployeManagement.Models
                     value = value.Trim();
                     if (value.Length > 1 && !string.IsNullOrWhiteSpace(value))
                     {
-                        _name = value[0].ToString().ToUpper() + value.Substring(1);
+                        _name = value[0].ToString().ToUpper() + value.Substring(1).ToLower();
                         break;
                     }
                     Console.BackgroundColor = ConsoleColor.Red;
@@ -102,7 +102,7 @@ namespace EmployeManagement.Models
             {
                 Array.Resize(ref Employees, Employees.Length + 1);
                 employee.No = $"{employee.DepartmentName[0..2].ToUpper()}{1000+Employees.Length}";
-                Employees[Employees.Length - 1] = employee;
+                Employees[^1] = employee;
             }
             else
             {

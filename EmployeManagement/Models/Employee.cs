@@ -113,24 +113,25 @@ namespace EmployeManagement.Models
                 //}
 
                 //salarySum += value;
-                //while (true)
-                //{
-                //    if (salarySum < tempDepartment.SalaryLimit && value>250)
-                //    {
-                //        _salary = value;
-                //        break;
-                //    }
-                //    Console.BackgroundColor = ConsoleColor.Red;
-                //    Console.ForegroundColor = ConsoleColor.White;
-                //    Console.WriteLine($"Warning!!! Salary Limit for {tempDepartment.Name} is {tempDepartment.SalaryLimit}!\n" +
-                //                      $"Your Employees Salaries Sum is {salarySum-value}!\n" +
-                //                      $"Enter Salary correctly!");
-                //    Console.BackgroundColor = ConsoleColor.Black;
-                //    int.TryParse(Console.ReadLine(), out value);
+                while (true)
+                {
+                    if (value > 250)
+                    {
+                        _salary = value;
+                        break;
+                    }
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($"Warning!!!Please Enter Salary Correctly!\n");
+                    Console.BackgroundColor = ConsoleColor.Black;
 
-                //}
+                    int.TryParse(Console.ReadLine(), out value);
 
-                _salary = value;
+                }
+                //Console.WriteLine($"Warning!!! Salary Limit for {tempDepartment.Name} is {tempDepartment.SalaryLimit}!\n" +
+                //                  $"Your Employees Salaries Sum is {salarySum - value}!\n" +
+                //                  $"Enter Salary correctly!");
+
             }
             //set departament name == dep name =>salary Limit find
 

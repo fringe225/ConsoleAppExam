@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EmployeManagement.Services;
 
 namespace EmployeManagement.Models
 {
@@ -23,10 +24,11 @@ namespace EmployeManagement.Models
 
         public Employee(string fullName, string position, int salary, string departmentName)
         {
-            FullName=fullName;
-            Position=position;
+            DepartmentName = departmentName;
+            FullName =fullName;
+            Position =position;
             Salary=salary;
-            DepartmentName=departmentName;
+            
             
         }
 
@@ -87,7 +89,49 @@ namespace EmployeManagement.Models
         public int Salary
         {
             get => _salary;
-            set => _salary = value;
+            set
+            {
+                //Department tempDepartment=null;
+                //int salarySum = 0;
+                //HumanResourceManagerServices humanResorceManagerServices = new HumanResourceManagerServices(); // will be NULL DEPARTMENT HERE EVERY TIME CAUSE OF NEW INSTANCE
+                //foreach (Department department in humanResorceManagerServices.Departments)
+                //{
+                //    if (department.Name.ToLower() == DepartmentName.ToLower())
+                //    {
+
+                //        tempDepartment = department;
+
+                //    }
+                //}
+
+                //if (tempDepartment.GetEmployees() != null)
+                //{
+                //    foreach (Employee employee in tempDepartment.GetEmployees())
+                //    {
+                //        salarySum += employee.Salary;
+                //    }
+                //}
+
+                //salarySum += value;
+                //while (true)
+                //{
+                //    if (salarySum < tempDepartment.SalaryLimit && value>250)
+                //    {
+                //        _salary = value;
+                //        break;
+                //    }
+                //    Console.BackgroundColor = ConsoleColor.Red;
+                //    Console.ForegroundColor = ConsoleColor.White;
+                //    Console.WriteLine($"Warning!!! Salary Limit for {tempDepartment.Name} is {tempDepartment.SalaryLimit}!\n" +
+                //                      $"Your Employees Salaries Sum is {salarySum-value}!\n" +
+                //                      $"Enter Salary correctly!");
+                //    Console.BackgroundColor = ConsoleColor.Black;
+                //    int.TryParse(Console.ReadLine(), out value);
+
+                //}
+
+                _salary = value;
+            }
             //set departament name == dep name =>salary Limit find
 
         }
@@ -99,7 +143,7 @@ namespace EmployeManagement.Models
                    $"Full Name: {FullName}\n" +
                    $"Position: {Position}\n" +
                    $"Salary: {Salary}\n" +
-                   $"Department: {DepartmentName}";
+                   $"Department: {DepartmentName}\n";
 
         }
     }

@@ -154,13 +154,9 @@ namespace EmployeManagement.Models
             return $"Department Name: {Name}\n" +
                    $"Worker Limit: {WorkerLimit}\n" +
                    $"Salary Limit: {SalaryLimit}\n" +
-                   $"Employees in Department: {Employees.Length}";
+                   $"Employees in Department: {Employees.Length}\n";
         }
 
-        public int EmployeeSize()
-        {
-            return Employees.Length+1;
-        }
 
     }
 }

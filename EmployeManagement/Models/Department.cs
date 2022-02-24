@@ -164,10 +164,12 @@ namespace EmployeManagement.Models
         }
         public override string ToString()
         {
-            return $"Department Name: {Name}\n" +
-                   $"Worker Limit: {WorkerLimit}\n" +
-                   $"Salary Limit: {SalaryLimit}\n" +
-                   $"Employees in Department: {Employees.Length}\n";
+            return $"------------------------------------\n" +
+                   $"Department Name: {Name}             |\n" +
+                   $"Worker Limit: {WorkerLimit}         |\n" +
+                   $"Salary Limit: {SalaryLimit}         |\n" +
+                   $"Employees in Department: {Employees.Length}|\n" +
+                   $"------------------------------------\n";
         }
 
 

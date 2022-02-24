@@ -15,8 +15,13 @@ namespace EmployeManagement
 
             do
             {
-                Console.Clear();            
-                Console.WriteLine("Choose Option\n");
+                Console.Clear();
+                Console.Title = "Main Menu";
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Welcome!\n");
+                Console.ResetColor();
+                Console.WriteLine("------------------------------------");
                 Console.WriteLine("1. Show Departments");
                 Console.WriteLine("2. Create Department");
                 Console.WriteLine("3. Edit Department");
@@ -25,9 +30,9 @@ namespace EmployeManagement
                 Console.WriteLine("6. Add Employee");
                 Console.WriteLine("7. Edit Employee");
                 Console.WriteLine("8. Remove Employee");
-                Console.WriteLine("9. Seach Employee");
+                Console.WriteLine("9. Search Employee");
                 Console.WriteLine("10. Exit");
-
+                Console.WriteLine("------------------------------------");
                 int choose;
                 while (!int.TryParse(Console.ReadLine(), out choose) || choose < 1 || choose > 10)
                 {

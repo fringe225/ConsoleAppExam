@@ -158,7 +158,7 @@ namespace EmployeManagement
         {
             if (humanResourceManagerServices.Departments.Length > 0)
             {
-                Console.WriteLine("Enter Department Name");
+               
                 foreach (Department department  in humanResourceManagerServices.Departments)
                 {
                     Console.WriteLine(department);
@@ -170,6 +170,7 @@ namespace EmployeManagement
                 return;
             }
 
+            Console.WriteLine("\nEnter Department Name");
             string departmentName = Console.ReadLine();
 
             Console.Clear();

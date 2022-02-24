@@ -12,6 +12,7 @@ namespace EmployeManagement.Models
         private int _workerLimit;
         private int _salaryLimit;
         private Employee[] Employees;
+        private int _addedEmployes = 0;
 
         public Department(string name, int workerLimit, int salaryLimit)
         {
@@ -21,14 +22,7 @@ namespace EmployeManagement.Models
             Employees = new Employee[0];
         }
 
-        public Employee[] EmployeesProp
-        {
-            get => Employees;
-            set
-            {
-                Employees = value;
-            }
-        }
+       
         public string Name
         {
             get => _name;
@@ -100,9 +94,28 @@ namespace EmployeManagement.Models
         {
             if (Employees.Length < WorkerLimit)
             {
+                for (int i = 0; i < Employees.Length; i++)
+                {
+                    if (Employees[i] == null)
+                    {
+                        employee.No = $"{employee.DepartmentName[0..2].ToUpper()}{1000 + _addedEmployes + 1}";
+                        _addedEmployes++;
+                        Employees[i] = employee;
+                        Console.BackgroundColor = ConsoleColor.Green;
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine($"Employee created with NO {employee.No} !");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        return;
+                    }
+                }
                 Array.Resize(ref Employees, Employees.Length + 1);
-                employee.No = $"{employee.DepartmentName[0..2].ToUpper()}{1000+Employees.Length}";
+                employee.No = $"{employee.DepartmentName[0..2].ToUpper()}{1000+ _addedEmployes+1}";
+                _addedEmployes++;
                 Employees[^1] = employee;
+                Console.BackgroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Employee created with NO {employee.No} !");
+                Console.BackgroundColor = ConsoleColor.Black;
             }
             else
             {

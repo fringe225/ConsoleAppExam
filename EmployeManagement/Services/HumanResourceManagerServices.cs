@@ -101,9 +101,16 @@ namespace EmployeManagement.Services
             Department department = FindDepartment(departmentName);
             if (department != null)
             {
-                while (SalaryLimitCheck(department, salary))
+
+                while (!SalaryLimitCheck(department, salary))  // can change to calc salaryaverage*employee.Length BUT if any employee is null?
                 {
                     int.TryParse(Console.ReadLine(), out salary);
+                }
+
+                if (salary == 0)
+                {
+
+                    return;
                 }
                 Employee employee = new Employee(fullName, position, salary, departmentName);
                 department.AddEmployee(employee);
@@ -118,32 +125,56 @@ namespace EmployeManagement.Services
             }
         }
 
-        public void RemoveEmployee(string departmentName, string employeeNo) //have to add some changes with REF
+        public void RemoveEmployee(string departmentName, string employeeNo) 
         {
             Department department = FindDepartment(departmentName);
-            Employee[] employeeArr = new Employee[department.GetEmployees().Length - 1];
+
+            #region Employee remove by index save without NULL
+            //Employee[] employeeArr = new Employee[department.GetEmployees().Length - 1];
+            //if (department != null)
+            //{
+            //    int temp = 0;
+            //    for (int i = 0; i < department.GetEmployees().Length; i++)
+            //    {
+            //        if (department.GetEmployees()[i].No == employeeNo)
+            //        {
+            //            temp = i;
+            //        }
+            //    }
+
+            //    for (int i = 0; i < temp; i++)
+            //    {
+            //        employeeArr[i] = department.GetEmployees()[i];
+            //    }
+
+            //    for (int i = temp + 1; i < employeeArr.Length; i++)
+            //    {
+            //        employeeArr[i] = department.GetEmployees()[i];
+            //    }
+
+            //    department.EmployeProp = employeeArr;  //FIX ENCAPSULATION
+            //}
+            //else
+            //{
+            //    Console.BackgroundColor = ConsoleColor.Red;
+            //    Console.ForegroundColor = ConsoleColor.White;
+            //    Console.WriteLine("Warning!!! Department Name doesn't exist!");
+            //    Console.BackgroundColor = ConsoleColor.Black;
+            //}
+
+
+            #endregion
+
+
             if (department != null)
             {
-                int temp = 0;
                 for (int i = 0; i < department.GetEmployees().Length; i++)
                 {
-                    if (department.GetEmployees()[i].No == employeeNo)
+                    if (department.GetEmployees()[i].No.ToLower() == employeeNo.ToLower())
                     {
-                        temp = i;
+                        department.GetEmployees()[i] = null;
                     }
                 }
-
-                for (int i = 0; i < temp; i++)
-                {
-                    employeeArr[i] = department.GetEmployees()[i];
-                }
-
-                for (int i = temp + 1; i < employeeArr.Length; i++)
-                {
-                    employeeArr[i] = department.GetEmployees()[i];
-                }
-
-                department.EmployeesProp = employeeArr;  //FIX ENCAPSULATION
             }
             else
             {
@@ -152,6 +183,7 @@ namespace EmployeManagement.Services
                 Console.WriteLine("Warning!!! Department Name doesn't exist!");
                 Console.BackgroundColor = ConsoleColor.Black;
             }
+
         }
 
         public void EditEmployee(string employeeNo, int newSalary)
@@ -160,6 +192,15 @@ namespace EmployeManagement.Services
             {
                 if (department != null)
                 {
+                    while (!SalaryLimitCheck(department, newSalary))
+                    {
+                        int.TryParse(Console.ReadLine(), out newSalary);
+                    }
+
+                    if (newSalary == 0)
+                    {
+                        return;
+                    }
                     foreach (Employee employee in department.GetEmployees())
                     {
                         if (employee.No == employeeNo)
@@ -291,21 +332,52 @@ namespace EmployeManagement.Services
             {
                 foreach (Employee employee in department.GetEmployees())
                 {
-                    salarySum += employee.Salary;
+                    if (employee != null)
+                    {
+                        salarySum += employee.Salary;
+
+                    }
                 }
             }
 
-            salarySum += value;
-            if (salarySum <= department.SalaryLimit)
+            if (value == 0)
             {
+                return true;
+            }
+
+            if (value < 250)
+            {
+
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Warning!!!Please Enter Salary Correctly!" +
+                                  $"Minimum salary is 250!");
+                Console.BackgroundColor = ConsoleColor.Black;
                 return false;
             }
-            Console.BackgroundColor = ConsoleColor.Red;
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"Warning!!! Salary Limit for {department.Name} is {department.SalaryLimit}!\n" +
-                              $"Your Employees Salaries Sum is {salarySum - value}!\n" +
-                              $"Enter Salary correctly!");
-            Console.BackgroundColor = ConsoleColor.Black;
+
+            if (salarySum == 0 && value<=department.SalaryLimit)
+            {
+                return true;
+            }
+
+            if (salarySum >= department.SalaryLimit - 249)
+            {
+                return true;
+            }
+            salarySum += value;
+           
+            if (salarySum >= department.SalaryLimit)//(department.SalaryLimit-250)
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Warning!!! Salary Limit for {department.Name} is {department.SalaryLimit}!\n" +
+                                  $"Your Employees Salaries Sum is {salarySum - value}!\n" +
+                                  $"Enter Salary correctly or Enter 0 to exit!");
+                Console.BackgroundColor = ConsoleColor.Black;
+                return false;
+            }
+            
 
             return true;
         }

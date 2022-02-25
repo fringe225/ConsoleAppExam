@@ -306,10 +306,18 @@ namespace EmployeManagement
             Console.Clear();
 
             //show employees in department - use method to extract for each loop printing
-            foreach(Employee employee in humanResourceManagerServices.GetEmployeesByDepartmentName(departmentName))
+            if (humanResourceManagerServices.GetEmployeesByDepartmentName(departmentName) != null)
             {
-                Console.WriteLine(employee);
+                foreach (Employee employee in humanResourceManagerServices.GetEmployeesByDepartmentName(departmentName))
+                {
+                    if (employee != null)
+                    {
+                        Console.WriteLine(employee);
+                    }
+                    
+                }
             }
+            
 
             Console.WriteLine("Enter EmployeeNo: ");
             string employeeNo = Console.ReadLine();

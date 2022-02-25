@@ -91,38 +91,7 @@ namespace EmployeManagement.Models
             get => _salary;
             set
             {
-                //Department tempDepartment=null;
-                //int salarySum = 0;
-                //HumanResourceManagerServices humanResorceManagerServices = new HumanResourceManagerServices(); // will be NULL DEPARTMENT HERE EVERY TIME CAUSE OF NEW INSTANCE
-                //foreach (Department department in humanResorceManagerServices.Departments)
-                //{
-                //    if (department.Name.ToLower() == DepartmentName.ToLower())
-                //    {
-
-                //        tempDepartment = department;
-
-                //    }
-                //}
-
-                //if (tempDepartment.GetEmployees() != null)
-                //{
-                //    foreach (Employee employee in tempDepartment.GetEmployees())
-                //    {
-                //        salarySum += employee.Salary;
-                //    }
-                //}
-
-                //salarySum += value;
-                //while (true)
-                //{
-                //if (value == 0)
-                //{
-                //    Console.BackgroundColor = ConsoleColor.Red;
-                //    Console.ForegroundColor = ConsoleColor.White;
-                //    Console.WriteLine("Warrning!!! You Can't Create Employee with Salary - 0 or Edit Employee Salary to 0!");
-                //    Console.BackgroundColor = ConsoleColor.Black;
-                //    return;
-                //}
+                
                 while (true)
                 {
                     if (value >= 250)
@@ -143,15 +112,10 @@ namespace EmployeManagement.Models
 
                 
 
-                //int.TryParse(Console.ReadLine(), out value);
-
-                //}
-                //Console.WriteLine($"Warning!!! Salary Limit for {tempDepartment.Name} is {tempDepartment.SalaryLimit}!\n" +
-                //                  $"Your Employees Salaries Sum is {salarySum - value}!\n" +
-                //                  $"Enter Salary correctly!");
+              
 
             }
-            //set departament name == dep name =>salary Limit find
+           
 
         }
 

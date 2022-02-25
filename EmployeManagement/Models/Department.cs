@@ -94,7 +94,7 @@ namespace EmployeManagement.Models
 
         public void AddEmployee(Employee employee)
         {
-            int salaryResult = 1;
+            int salaryResult = employee.Salary;
 
             if (CurrentEmployeeSize() < WorkerLimit)
             {
@@ -201,7 +201,7 @@ namespace EmployeManagement.Models
                                       $"You can set Salary only between 250 - {SalaryLimit - (CalcSalaryAverage() * CurrentEmployeeSize()-employee.Salary)}");
                     Console.BackgroundColor = ConsoleColor.Black;
                     int.TryParse(Console.ReadLine(), out salaryResult);
-                    //employee.Salary = salaryResult == 0 ? employee.Salary : salaryResult;
+                    
                 }
             }
 

@@ -24,7 +24,7 @@ namespace EmployeManagement.Models
 
         public Employee(string fullName, string position, int salary, string departmentName)
         {
-            DepartmentName = departmentName;
+            DepartmentName = $"{departmentName[0].ToString().ToUpper()}{departmentName.Substring(1).ToLower()}";
             FullName =fullName;
             Position =position;
             Salary=salary;
@@ -91,7 +91,6 @@ namespace EmployeManagement.Models
             get => _salary;
             set
             {
-                _salary = value;
                 //Department tempDepartment=null;
                 //int salarySum = 0;
                 //HumanResourceManagerServices humanResorceManagerServices = new HumanResourceManagerServices(); // will be NULL DEPARTMENT HERE EVERY TIME CAUSE OF NEW INSTANCE
@@ -116,26 +115,35 @@ namespace EmployeManagement.Models
                 //salarySum += value;
                 //while (true)
                 //{
-                    //if (value == 0)
-                    //{
-                    //    Console.BackgroundColor = ConsoleColor.Red;
-                    //    Console.ForegroundColor = ConsoleColor.White;
-                    //    Console.WriteLine("Warrning!!! You Can't Create Employee with Salary - 0 or Edit Employee Salary to 0!");
-                    //    Console.BackgroundColor = ConsoleColor.Black;
-                    //    return;
-                    //}
-                    //if (value >= 250)
-                    //{
-                    //    _salary = value;
-                    //    break;
-                    //}
-                    
-                    //Console.BackgroundColor = ConsoleColor.Red;
-                    //Console.ForegroundColor = ConsoleColor.White;
-                    //Console.WriteLine($"Warning!!!Please Enter Salary Correctly!\n");
-                    //Console.BackgroundColor = ConsoleColor.Black;
+                //if (value == 0)
+                //{
+                //    Console.BackgroundColor = ConsoleColor.Red;
+                //    Console.ForegroundColor = ConsoleColor.White;
+                //    Console.WriteLine("Warrning!!! You Can't Create Employee with Salary - 0 or Edit Employee Salary to 0!");
+                //    Console.BackgroundColor = ConsoleColor.Black;
+                //    return;
+                //}
+                while (true)
+                {
+                    if (value >= 250)
+                    {
+                        _salary = value;
+                        break;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine($"Warning!!! Minimum Salary is 250!\n");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        int.TryParse(Console.ReadLine(), out value);
+                    }
+                }
+                
 
-                    //int.TryParse(Console.ReadLine(), out value);
+                
+
+                //int.TryParse(Console.ReadLine(), out value);
 
                 //}
                 //Console.WriteLine($"Warning!!! Salary Limit for {tempDepartment.Name} is {tempDepartment.SalaryLimit}!\n" +

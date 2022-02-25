@@ -113,7 +113,10 @@ namespace EmployeManagement
             int.TryParse(Console.ReadLine(), out int salarylimit);
 
             humanResourceManagerServices.AddDepartment(name,workerLimit,salarylimit);
-            Console.WriteLine("Department have been Created!");
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"Department has been created!");
+            Console.BackgroundColor = ConsoleColor.Black;
         }
 
         public static void ChangeDepartmentInfoMenu(HumanResourceManagerServices humanResourceManagerServices)
@@ -123,8 +126,10 @@ namespace EmployeManagement
             while (true)
             {
                 Console.Clear();
+                ShowDepartaments(humanResourceManagerServices);
                 Console.WriteLine("Enter Department name: ");
                 name = Console.ReadLine();
+                Console.Clear();
                 Console.WriteLine("1. Change Department Name");
                 Console.WriteLine("2. Change Department Work Limit");
                 Console.WriteLine("3. Change Department Salary Limit");
@@ -138,6 +143,7 @@ namespace EmployeManagement
                         Console.WriteLine("Enter New Department Name: ");
                         humanResourceManagerServices.EditDepartments(name,Console.ReadLine());
                         Console.ReadLine();
+                        return;
                         break;
                     case 2:
                         Console.Clear();
@@ -145,6 +151,7 @@ namespace EmployeManagement
                         int.TryParse(Console.ReadLine(), out int workerLimit);
                         humanResourceManagerServices.EditDepartments(name,workerLimit);
                         Console.ReadLine(); // Can be moved to Service Class for each
+                        return;
                         break;
                     case 3:
                         Console.Clear();
@@ -152,6 +159,7 @@ namespace EmployeManagement
                         int.TryParse(Console.ReadLine(), out int salaryLimit);
                         humanResourceManagerServices.EditDepartments(salaryLimit,name);
                         Console.ReadLine();
+                        return;
                         break;
                     case 4:
                         return;
@@ -209,7 +217,6 @@ namespace EmployeManagement
         {
             if (humanResourceManagerServices.Departments.Length > 0)
             {
-                Console.WriteLine("Enter Department Name");
                 foreach (Department department in humanResourceManagerServices.Departments)
                 {
                     Console.WriteLine(department);
@@ -220,21 +227,14 @@ namespace EmployeManagement
                 Console.WriteLine("Create Department First!");
                 return;
             }
-
+            Console.WriteLine("Enter Department Name");
             string departmentName = Console.ReadLine();
-
-            foreach (Department department in humanResourceManagerServices.Departments)
+            foreach (Employee employee in humanResourceManagerServices.GetEmployeesByDepartmentName(departmentName))
             {
-                if (department.Name == departmentName)
-                {
-                    foreach (Employee employee in department.GetEmployees())
-                    {
-                        Console.WriteLine(employee);
-                    }
+                Console.WriteLine(employee);
+            }
 
-                    break;
-                }
-            } // NEED!!! ADD CW DOESNT EXIST DEPARTMENT!!!
+          // NEED!!! ADD CW DOESNT EXIST DEPARTMENT!!!
             //foreach (Employee employee in humanResourceManagerServices.GetEmployeesByDepartmentName(departmentName)) // need to test
             //{
             //    Console.WriteLine(employee);
@@ -248,6 +248,7 @@ namespace EmployeManagement
             while (true)
             {
                 Console.Clear();
+                ShowEmployees(humanResourceManagerServices);
                 Console.WriteLine("Enter Employee No: ");
                 employeeNo = Console.ReadLine();
                 Console.WriteLine("1. Change Employee Position");
@@ -262,6 +263,7 @@ namespace EmployeManagement
                         Console.WriteLine("Enter New position: "); // for {employe no} maybe ?
                         humanResourceManagerServices.EditEmployee(employeeNo, Console.ReadLine());
                         Console.ReadLine();
+                        return;
                         break;
                     case 2:
                         Console.Clear();
@@ -269,6 +271,7 @@ namespace EmployeManagement
                         int.TryParse(Console.ReadLine(), out int newSalary);
                         humanResourceManagerServices.EditEmployee(employeeNo,newSalary);
                         Console.ReadLine(); // Can be moved to Service Class for each
+                        return;
                         break;
                     case 3:
                         return;
@@ -280,7 +283,7 @@ namespace EmployeManagement
         {
             if (humanResourceManagerServices.Departments.Length > 0)
             {
-                Console.WriteLine("Enter Department Name");
+                
                 foreach (Department department in humanResourceManagerServices.Departments)
                 {
                     Console.WriteLine(department);
@@ -291,15 +294,25 @@ namespace EmployeManagement
                 Console.WriteLine("Create Department First!");
                 return;
             }
-
+            Console.WriteLine("Enter Department Name");
             string departmentName = Console.ReadLine();
+            Console.Clear();
 
             //show employees in department - use method to extract for each loop printing
+            foreach(Employee employee in humanResourceManagerServices.GetEmployeesByDepartmentName(departmentName))
+            {
+                Console.WriteLine(employee);
+            }
 
             Console.WriteLine("Enter EmployeeNo: ");
             string employeeNo = Console.ReadLine();
 
             humanResourceManagerServices.RemoveEmployee(departmentName,employeeNo);
+
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"Employee has been deleted!");
+            Console.BackgroundColor = ConsoleColor.Black;
         }
 
         public static void FindEmployees(HumanResourceManagerServices humanResourceManagerServices)

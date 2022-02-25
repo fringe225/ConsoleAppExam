@@ -158,11 +158,13 @@ namespace EmployeManagement.Models
 
         public override string ToString()
         {
-            return $"Employee NO: {No}\n" +
-                   $"Full Name: {FullName}\n" +
-                   $"Position: {Position}\n" +
-                   $"Salary: {Salary}\n" +
-                   $"Department: {DepartmentName}\n";
+            return $" ---------------------------------------\n" +
+                   $"| Employee NO: {No}\r\t\t\t\t\t|\n" +
+                   $"| Full Name: {FullName}\r\t\t\t\t\t|\n" +
+                   $"| Position: {Position}\r\t\t\t\t\t|\n" +
+                   $"| Salary: {Salary}\r\t\t\t\t\t|\n" +
+                   $"| Department: {DepartmentName}\r\t\t\t\t\t|\n" +
+                   $" ---------------------------------------\n";
 
         }
     }

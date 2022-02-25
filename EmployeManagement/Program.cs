@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Data;
 using EmployeManagement.Models;
-using EmployeManagement.Interfaces;
-using EmployeManagement.Models;
 using EmployeManagement.Services;
 
 namespace EmployeManagement
@@ -21,18 +19,18 @@ namespace EmployeManagement
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Welcome!\n");
                 Console.ResetColor();
-                Console.WriteLine("------------------------------------");
-                Console.WriteLine("1. Show Departments");
-                Console.WriteLine("2. Create Department");
-                Console.WriteLine("3. Edit Department");
-                Console.WriteLine("4. Show Employees");
-                Console.WriteLine("5. Show Employees in Department");
-                Console.WriteLine("6. Add Employee");
-                Console.WriteLine("7. Edit Employee");
-                Console.WriteLine("8. Remove Employee");
-                Console.WriteLine("9. Search Employee");
-                Console.WriteLine("10. Exit");
-                Console.WriteLine("------------------------------------");
+                Console.WriteLine("--------------------------------");
+                Console.WriteLine("1. Show Departments\r\t\t\t\t|");
+                Console.WriteLine("2. Create Department\r\t\t\t\t|");
+                Console.WriteLine("3. Edit Department\r\t\t\t\t|");
+                Console.WriteLine("4. Show Employees\r\t\t\t\t|");
+                Console.WriteLine("5. Show Employees in Department\r\t\t\t\t|");
+                Console.WriteLine("6. Add Employee\r\t\t\t\t|");
+                Console.WriteLine("7. Edit Employee\r\t\t\t\t|");
+                Console.WriteLine("8. Remove Employee\r\t\t\t\t|");
+                Console.WriteLine("9. Search Employee\r\t\t\t\t|");
+                Console.WriteLine("10. Exit\r\t\t\t\t|");
+                Console.WriteLine("--------------------------------");
                 int choose;
                 while (!int.TryParse(Console.ReadLine(), out choose) || choose < 1 || choose > 10)
                 {
@@ -93,6 +91,7 @@ namespace EmployeManagement
 
         public static void ShowDepartaments(HumanResourceManagerServices humanResourceManagerServices)
         {
+            Console.Title = "Show Department";
             foreach (Department department in humanResourceManagerServices.GetDepartments())
             {
                 if (department != null)
@@ -105,6 +104,7 @@ namespace EmployeManagement
         }
         public static void AddDepartment(HumanResourceManagerServices humanResourceManagerServices)
         {
+            Console.Title = "Add Department";
             Console.WriteLine("Name of Department: ");
             string name = Console.ReadLine();
             Console.WriteLine("Worker limit: ");
@@ -121,6 +121,7 @@ namespace EmployeManagement
 
         public static void ChangeDepartmentInfoMenu(HumanResourceManagerServices humanResourceManagerServices)
         {
+            Console.Title = "Edit Department Menu";
             int choose;
             string name;
             while (true)
@@ -169,6 +170,7 @@ namespace EmployeManagement
 
         public static void AddEmployee(HumanResourceManagerServices humanResourceManagerServices)
         {
+            Console.Title = "Add Employee";
             if (humanResourceManagerServices.Departments.Length > 0)
             {
                
@@ -201,6 +203,7 @@ namespace EmployeManagement
 
         public static void ShowEmployees(HumanResourceManagerServices humanResourceManagerServices)
         {
+            Console.Title = "Employees Information List";
             foreach (Department department in humanResourceManagerServices.Departments)
             {
                 if (department != null)
@@ -215,6 +218,7 @@ namespace EmployeManagement
 
         public static void ShowDepartmentEmployees(HumanResourceManagerServices humanResourceManagerServices)
         {
+            Console.Title = "Employees List by Department";
             if (humanResourceManagerServices.Departments.Length > 0)
             {
                 foreach (Department department in humanResourceManagerServices.Departments)
@@ -228,6 +232,7 @@ namespace EmployeManagement
                 return;
             }
             Console.WriteLine("Enter Department Name");
+            Console.Clear();
             string departmentName = Console.ReadLine();
             foreach (Employee employee in humanResourceManagerServices.GetEmployeesByDepartmentName(departmentName))
             {
@@ -243,6 +248,7 @@ namespace EmployeManagement
 
         public static void ChangeEmployeeInfoMenu(HumanResourceManagerServices humanResourceManagerServices)
         {
+            Console.Title = "Edit Employee Information Menu";
             int choose;
             string employeeNo;
             while (true)
@@ -281,6 +287,7 @@ namespace EmployeManagement
 
         public static void DeleteEmployee(HumanResourceManagerServices humanResourceManagerServices)
         {
+            Console.Title = "Remove Employee from Department";
             if (humanResourceManagerServices.Departments.Length > 0)
             {
                 
@@ -317,6 +324,7 @@ namespace EmployeManagement
 
         public static void FindEmployees(HumanResourceManagerServices humanResourceManagerServices)
         {
+            Console.Title = "Search Employees by Information";
             Console.WriteLine("Enter information about Employee: Name, Surename, Position, EmployeeNo.");
             string search = Console.ReadLine()??" ";
             foreach (Employee employee in humanResourceManagerServices.SearchEmployee(search))

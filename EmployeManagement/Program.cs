@@ -348,17 +348,17 @@ namespace EmployeManagement
             Console.Title = "Search Employees by Information";
             Console.WriteLine("Enter information about Employee: Name, Surename, Position, EmployeeNo.");
             string search = Console.ReadLine()??" ";
-            foreach (Employee employee in humanResourceManagerServices.SearchEmployee(search))
+
+
+            if (humanResourceManagerServices.SearchEmployee(search)!=null)
             {
-                if (employee != null)
+                foreach (Employee employee in humanResourceManagerServices.SearchEmployee(search))
                 {
-                    Console.WriteLine(employee);
+                    if (employee != null)
+                    {
+                        Console.WriteLine(employee);
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("Information doesn't match with any of Employee in database!!!");
-                }
-                
             }
         }
     }

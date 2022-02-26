@@ -59,8 +59,6 @@ namespace EmployeManagement.Services
                                       $"You can't set limit under than that! ");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
-               
-                
             }
             else
             {
@@ -74,7 +72,7 @@ namespace EmployeManagement.Services
         public void EditDepartments(int salaryLimit, string departmentName)
         {
             Department department = FindDepartment(departmentName);
-            
+
             int salarySize = 0;
             if (department != null)
             {
@@ -104,7 +102,6 @@ namespace EmployeManagement.Services
                                       $"You can't set limit under than that! ");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
-                
             }
             else
             {
@@ -128,10 +125,11 @@ namespace EmployeManagement.Services
                     if (employee != null)
                     {
                         employee.No = $"{department.Name[0..2].ToUpper()}{employee.No.Substring(2)}";
-                        employee.DepartmentName = $"{department.Name[0].ToString().ToUpper()}{department.Name.Substring(1).ToLower()}";
+                        employee.DepartmentName =
+                            $"{department.Name[0].ToString().ToUpper()}{department.Name.Substring(1).ToLower()}";
                     }
-                    
                 }
+
                 Console.BackgroundColor = ConsoleColor.Green;
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine($"Department Name for Department {departmentName} has been changed" +
@@ -152,7 +150,6 @@ namespace EmployeManagement.Services
             Department department = FindDepartment(departmentName);
             if (department != null)
             {
-
                 Employee employee = new Employee(fullName, position, salary, departmentName);
                 department.AddEmployee(employee);
                 return;
@@ -166,11 +163,12 @@ namespace EmployeManagement.Services
             }
         }
 
-        public void RemoveEmployee(string departmentName, string employeeNo) 
+        public void RemoveEmployee(string departmentName, string employeeNo)
         {
             Department department = FindDepartment(departmentName);
 
             #region Employee remove by index save without NULL
+
             //Employee[] employeeArr = new Employee[department.GetEmployees().Length - 1];
             //if (department != null)
             //{
@@ -203,9 +201,7 @@ namespace EmployeManagement.Services
             //    Console.BackgroundColor = ConsoleColor.Black;
             //}
 
-
             #endregion
-
 
             if (department != null)
             {
@@ -213,7 +209,8 @@ namespace EmployeManagement.Services
                 {
                     for (int i = 0; i < department.GetEmployees().Length; i++)
                     {
-                        if (department.GetEmployees()[i].No.ToLower() == employeeNo.ToLower())
+                        if (department.GetEmployees()[i] != null &&
+                            department.GetEmployees()[i].No.ToLower() == employeeNo.ToLower())
                         {
                             department.GetEmployees()[i] = null;
                             Console.BackgroundColor = ConsoleColor.Green;
@@ -230,7 +227,6 @@ namespace EmployeManagement.Services
                     Console.WriteLine("Warning!!! Employee with that Number Doesn't exist!");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
-                
             }
             else
             {
@@ -239,7 +235,6 @@ namespace EmployeManagement.Services
                 Console.WriteLine("Warning!!! Department Name doesn't exist!");
                 Console.BackgroundColor = ConsoleColor.Black;
             }
-
         }
 
         public void EditEmployee(string employeeNo, int newSalary)
@@ -250,7 +245,7 @@ namespace EmployeManagement.Services
                 {
                     foreach (Employee employee in department.GetEmployees())
                     {
-                        if (employee.No == employeeNo)
+                        if (employee != null && employee.No == employeeNo)
                         {
                             newSalary = department.EditSalary(employee, newSalary);
                             if (newSalary != 0)
@@ -262,19 +257,17 @@ namespace EmployeManagement.Services
                                 Console.WriteLine($"Salary for Employee {employee.FullName} has been changed" +
                                                   $" from {temp} to {employee.Salary}.");
                                 Console.BackgroundColor = ConsoleColor.Black;
+                                return;
                             }
-                           
                         }
                     }
                 }
-                else
-                {
-                    Console.BackgroundColor = ConsoleColor.Red;
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine($"Warning!!! Employee with NO-{employeeNo} doesn't exist!");
-                    Console.BackgroundColor = ConsoleColor.Black;
-                }
             }
+
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"Warning!!! Employee with NO-{employeeNo} doesn't exist!");
+            Console.BackgroundColor = ConsoleColor.Black;
         }
 
         public void EditEmployee(string employeeNo, string newPosition)
@@ -285,7 +278,7 @@ namespace EmployeManagement.Services
                 {
                     foreach (Employee employee in department.GetEmployees())
                     {
-                        if (employee.No == employeeNo)
+                        if (employee != null && employee.No == employeeNo)
                         {
                             string temp = employee.Position;
                             employee.Position = newPosition;
@@ -294,18 +287,15 @@ namespace EmployeManagement.Services
                             Console.WriteLine($"Position for Employee {employee.FullName} has been changed" +
                                               $" from {temp} to {employee.Position}.");
                             Console.BackgroundColor = ConsoleColor.Black;
+                            return;
                         }
-                       
                     }
                 }
-                else
-                {
-                    Console.BackgroundColor = ConsoleColor.Red;
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine($"Warning!!! Employee with NO-{employeeNo} doesn't exist!");
-                    Console.BackgroundColor = ConsoleColor.Black;
-                }
             }
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"Warning!!! Employee with NO-{employeeNo} doesn't exist!");
+            Console.BackgroundColor = ConsoleColor.Black;
         }
 
         public Employee[] GetEmployeesByDepartmentName(string departmentName)
@@ -346,12 +336,10 @@ namespace EmployeManagement.Services
                             findEmployees[^1] = employee;
                         }
                     }
-                    
                 }
-                
             }
 
-            if (findEmployees == null)
+            if (findEmployees.Length==0)
             {
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.ForegroundColor = ConsoleColor.White;
@@ -375,6 +363,5 @@ namespace EmployeManagement.Services
 
             return null;
         }
-
     }
 }

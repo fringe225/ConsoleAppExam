@@ -209,13 +209,28 @@ namespace EmployeManagement.Services
 
             if (department != null)
             {
-                for (int i = 0; i < department.GetEmployees().Length; i++)
+                if (!string.IsNullOrWhiteSpace(employeeNo))
                 {
-                    if (department.GetEmployees()[i].No.ToLower() == employeeNo.ToLower())
+                    for (int i = 0; i < department.GetEmployees().Length; i++)
                     {
-                        department.GetEmployees()[i] = null;
+                        if (department.GetEmployees()[i].No.ToLower() == employeeNo.ToLower())
+                        {
+                            department.GetEmployees()[i] = null;
+                            Console.BackgroundColor = ConsoleColor.Green;
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine($"Employee has been deleted!");
+                            Console.BackgroundColor = ConsoleColor.Black;
+                        }
                     }
                 }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Warning!!! Employee with that Number Doesn't exist!");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
+                
             }
             else
             {

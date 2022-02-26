@@ -234,10 +234,22 @@ namespace EmployeManagement
             Console.WriteLine("Enter Department Name");
             Console.Clear();
             string departmentName = Console.ReadLine();
-            foreach (Employee employee in humanResourceManagerServices.GetEmployeesByDepartmentName(departmentName))
+            if (humanResourceManagerServices.GetEmployeesByDepartmentName(departmentName) != null)
             {
-                Console.WriteLine(employee);
+                foreach (Employee employee in humanResourceManagerServices.GetEmployeesByDepartmentName(departmentName))
+                {
+                    Console.WriteLine(employee);
+                }
             }
+            else
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Department doesn't exist! ");
+                Console.BackgroundColor = ConsoleColor.Black;
+            }
+
+              
 
           // NEED!!! ADD CW DOESNT EXIST DEPARTMENT!!!
             //foreach (Employee employee in humanResourceManagerServices.GetEmployeesByDepartmentName(departmentName)) // need to test
@@ -317,6 +329,10 @@ namespace EmployeManagement
                     
                 }
             }
+            else
+            {
+                return;
+            }
             
 
             Console.WriteLine("Enter EmployeeNo: ");
@@ -324,10 +340,7 @@ namespace EmployeManagement
 
             humanResourceManagerServices.RemoveEmployee(departmentName,employeeNo);
 
-            Console.BackgroundColor = ConsoleColor.Green;
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"Employee has been deleted!");
-            Console.BackgroundColor = ConsoleColor.Black;
+            
         }
 
         public static void FindEmployees(HumanResourceManagerServices humanResourceManagerServices)
